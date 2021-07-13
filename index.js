@@ -37,5 +37,41 @@ function rollTwoDice(times){
     }
     return result;
 }
-console.log(rollTwoDice(1113110));
+//console.log(rollTwoDice(1113110));
+
+/*
+* Power
+* input: number, exponent
+* out: result (number)
+* */
+
+function power(number, exponent){
+    let secondDegrees = {
+        '1' : number,
+    };
+    let currentDegreeResult = number;
+    let currentDegree = 1;
+    let result = 1;
+
+    while (currentDegree < exponent){
+        currentDegreeResult *= currentDegreeResult;
+        currentDegree *= 2;
+        secondDegrees[currentDegree] = currentDegreeResult;
+    }
+
+    if(currentDegree === exponent){
+        return secondDegrees[exponent];
+    }
+
+    let resultDegrees = Object.keys(secondDegrees);
+    for (let i = resultDegrees.length-1; i >= 0 ; i--){
+        if(resultDegrees[i] <= exponent){
+            result *= secondDegrees[resultDegrees[i]];
+            exponent -= resultDegrees[i];
+        }
+    }
+    return result;
+}
+
+//console.log(power(2, 2));
 
