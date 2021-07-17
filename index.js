@@ -6,8 +6,8 @@ out: array of random indexes
 
 function getRandomIndexesForArray(N, M) {
     let indexes = new Set();
-    while(indexes.size < M){
-        indexes.add(Math.floor(Math.random()*N));
+    while (indexes.size < M) {
+        indexes.add(Math.floor(Math.random() * N));
     }
     return Array.from(indexes);
 }
@@ -19,7 +19,7 @@ roll two dice & rolls statistic
 input: rolls count (number)
 out: result statistic(object)
 */
-function rollTwoDice(times){
+function rollTwoDice(times) {
     let result = {
         '0': 0,
         '1': 0,
@@ -28,15 +28,16 @@ function rollTwoDice(times){
         '4': 0,
         '5': 0,
     };
-    for (let i = 0; i < times; i++){
-        let twoRollsResult  = [ getRandomIndexesForArray(6,6)[0],(getRandomIndexesForArray(6,6))[0] ];
-        for(let i of twoRollsResult){
+    for (let i = 0; i < times; i++) {
+        let twoRollsResult = [getRandomIndexesForArray(6, 6)[0], (getRandomIndexesForArray(6, 6))[0]];
+        for (let i of twoRollsResult) {
             result[i]++;
         }
 
     }
     return result;
 }
+
 //console.log(rollTwoDice(1113110));
 
 /*
@@ -45,27 +46,27 @@ function rollTwoDice(times){
 * out: result (number)
 * */
 
-function power(number, exponent){
+function power(number, exponent) {
     let secondDegrees = {
-        '1' : number,
+        '1': number,
     };
     let currentDegreeResult = number;
     let currentDegree = 1;
     let result = 1;
 
-    while (currentDegree < exponent){
+    while (currentDegree < exponent) {
         currentDegreeResult *= currentDegreeResult;
         currentDegree *= 2;
         secondDegrees[currentDegree] = currentDegreeResult;
     }
 
-    if(currentDegree === exponent){
+    if (currentDegree === exponent) {
         return secondDegrees[exponent];
     }
 
     let resultDegrees = Object.keys(secondDegrees);
-    for (let i = resultDegrees.length-1; i >= 0 ; i--){
-        if(resultDegrees[i] <= exponent){
+    for (let i = resultDegrees.length - 1; i >= 0; i--) {
+        if (resultDegrees[i] <= exponent) {
             result *= secondDegrees[resultDegrees[i]];
             exponent -= resultDegrees[i];
         }
@@ -73,5 +74,42 @@ function power(number, exponent){
     return result;
 }
 
-//console.log(power(2, 2));
+//console.log(power(5, 8));
 
+
+/*
+* Add element in the end of the linked list with O(1)
+* linked list (one side direction) with top and bottom
+* Adding element in the end of the list - O(1)
+* */
+let bottom = {
+    value: 4,
+    link: null,
+}
+
+list = {
+    value: -Infinity,
+    link: {
+        value: 1,
+        link: {
+            value: 2,
+            link: {
+                value: 3,
+                link: bottom
+            }
+        }
+    }
+}
+
+function addInListEnd(el){
+    bottom.link = el;
+    el.link = null;
+
+    return el;
+
+}
+bottom = addInListEnd({value: 5, link: null});
+bottom = addInListEnd({value: 6, link: null});
+bottom = addInListEnd({value: 7, link: null});
+
+//console.log(list);
