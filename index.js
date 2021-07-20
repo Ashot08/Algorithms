@@ -151,14 +151,14 @@ let list2 = {
 /*
 * add element in begin of two directions linked list
 * */
-function insertSell(afterMe, newCell){
+function insertCell(afterMe, newCell){
     newCell.next = afterMe.next;
     afterMe.next = newCell;
     newCell.next.prev = newCell;
     newCell.prev = afterMe;
 }
 function addToTsList(top, newCell) {
-    insertSell(top, newCell);
+    insertCell(top, newCell);
 }
 // let tsListLimiter = {
 //     value: -Infinity,
@@ -186,7 +186,7 @@ function addToTsList(top, newCell) {
 * */
 
 function addToEndTsList(bottom, newCell) {
-    insertSell(bottom.prev, newCell);
+    insertCell(bottom.prev, newCell);
 }
 
 /*
@@ -197,3 +197,52 @@ function deleteCell(afterMe){
     afterMe.next.next.prev = afterMe;
     afterMe.next = afterMe.next.next;
 }
+
+/*
+* add cell in sorted two directions list (list sorted from min to max value)
+* */
+
+function addCellInSorted(top, cell){
+    let currentCell = top;
+    while (currentCell.next !== null){
+        if(currentCell.value > cell.value){
+            insertCell(currentCell, cell);
+            return;
+        }
+        currentCell = currentCell.next;
+    }
+}
+
+let tsList1, tsList2, tsList3, tsListLimiter;
+tsList1 = {
+    value: 1,
+}
+tsList2 = {
+    value: 2,
+}
+tsList3 = {
+    value: 3,
+}
+tsListLimiter = {
+    value: -Infinity,
+    prev: null
+}
+
+
+let sortedArr = [1,2,3,4,5,6,7,8];
+function construct2dList(top, arr){
+    let currentCell = top;
+    let topCell = currentCell;
+    for(let i = 0; i < arr.length; i++){
+        currentCell.next = {
+            value: arr[i],
+            next: null,
+            prev: currentCell
+        }
+        currentCell = currentCell.next;
+    }
+    return topCell;
+}
+
+//addCellInSorted(tsListLimiter ,{value: 3});
+console.log(construct2dList(tsListLimiter, sortedArr));
