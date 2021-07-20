@@ -145,3 +145,33 @@ let list2 = {
 }
 //console.log(findBiggest(list2));
 
+/*
+* add element in begin of two directions linked list
+* */
+function addToTsList(firstEl, el){
+    el.next = firstEl.next;
+    el.next.prev = el;
+    el.prev = firstEl;
+    firstEl.next = el;
+}
+
+let tsListLimiter = {
+    value: -Infinity,
+    next: tsList1,
+    prev: null
+}
+let tsList1 = {
+    value: 1,
+    next: tsList2,
+    prev: tsList1
+}
+let tsList2 = {
+    value: 2,
+    next: tsList3,
+    prev: tsList1
+}
+let tsList3 = {
+    value: 3,
+    next: null,
+    prev: tsList2
+}
