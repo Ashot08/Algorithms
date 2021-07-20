@@ -101,15 +101,17 @@ list = {
     }
 }
 
-function addInListEnd(el){
+function addInListEnd(el) {
     bottom.link = el;
     el.link = null;
 
     return el;
 }
-function deleteListEnd(){
+
+function deleteListEnd() {
 
 }
+
 //bottom = addInListEnd({value: 5, link: null});
 //bottom = addInListEnd({value: 6, link: null});
 //bottom = addInListEnd({value: 7, link: null});
@@ -120,16 +122,17 @@ function deleteListEnd(){
 /*
 * find biggest integer in one side direction list
 * */
-function findBiggest(list){
+function findBiggest(list) {
     let biggest = list.value;
-    while(list.link !== null){
-        if(list.link.value > biggest){
+    while (list.link !== null) {
+        if (list.link.value > biggest) {
             biggest = list.link.value;
         }
         list = list.link;
     }
     return biggest;
 }
+
 let list2 = {
     value: -Infinity,
     link: {
@@ -148,30 +151,40 @@ let list2 = {
 /*
 * add element in begin of two directions linked list
 * */
-function addToTsList(firstEl, el){
+function addToTsList(firstEl, el) {
     el.next = firstEl.next;
     el.next.prev = el;
     el.prev = firstEl;
     firstEl.next = el;
 }
 
-let tsListLimiter = {
-    value: -Infinity,
-    next: tsList1,
-    prev: null
-}
-let tsList1 = {
-    value: 1,
-    next: tsList2,
-    prev: tsList1
-}
-let tsList2 = {
-    value: 2,
-    next: tsList3,
-    prev: tsList1
-}
-let tsList3 = {
-    value: 3,
-    next: null,
-    prev: tsList2
+// let tsListLimiter = {
+//     value: -Infinity,
+//     next: tsList1,
+//     prev: null
+// }
+// let tsList1 = {
+//     value: 1,
+//     next: tsList2,
+//     prev: tsList1
+// }
+// let tsList2 = {
+//     value: 2,
+//     next: tsList3,
+//     prev: tsList1
+// }
+// let tsList3 = {
+//     value: 3,
+//     next: null,
+//     prev: tsList2
+// }
+
+/*
+* add element in the end of two directions linked list
+* */
+function addToEndTsList(bottom, newCell) {
+    newCell.prev = bottom.prev;
+    bottom.prev = newCell;
+    newCell.prev.next = newCell;
+    newCell.next = bottom;
 }
