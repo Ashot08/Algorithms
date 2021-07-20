@@ -106,10 +106,42 @@ function addInListEnd(el){
     el.link = null;
 
     return el;
+}
+function deleteListEnd(){
 
 }
-bottom = addInListEnd({value: 5, link: null});
-bottom = addInListEnd({value: 6, link: null});
-bottom = addInListEnd({value: 7, link: null});
+//bottom = addInListEnd({value: 5, link: null});
+//bottom = addInListEnd({value: 6, link: null});
+//bottom = addInListEnd({value: 7, link: null});
 
 //console.log(list);
+
+
+/*
+* find biggest integer in one side direction list
+* */
+function findBiggest(list){
+    let biggest = list.value;
+    while(list.link !== null){
+        if(list.link.value > biggest){
+            biggest = list.link.value;
+        }
+        list = list.link;
+    }
+    return biggest;
+}
+let list2 = {
+    value: -Infinity,
+    link: {
+        value: 1,
+        link: {
+            value: 2,
+            link: {
+                value: 3,
+                link: null,
+            }
+        }
+    }
+}
+//console.log(findBiggest(list2));
+
