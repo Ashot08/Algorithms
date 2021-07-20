@@ -188,3 +188,12 @@ function addToTsList(top, newCell) {
 function addToEndTsList(bottom, newCell) {
     insertSell(bottom.prev, newCell);
 }
+
+/*
+* delete cell from two directions list
+* */
+
+function deleteCell(afterMe){
+    afterMe.next.next.prev = afterMe;
+    afterMe.next = afterMe.next.next;
+}
