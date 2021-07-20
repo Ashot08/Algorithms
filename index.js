@@ -151,13 +151,15 @@ let list2 = {
 /*
 * add element in begin of two directions linked list
 * */
-function addToTsList(firstEl, el) {
-    el.next = firstEl.next;
-    el.next.prev = el;
-    el.prev = firstEl;
-    firstEl.next = el;
+function insertSell(afterMe, newCell){
+    newCell.next = afterMe.next;
+    afterMe.next = newCell;
+    newCell.next.prev = newCell;
+    newCell.prev = afterMe;
 }
-
+function addToTsList(top, newCell) {
+    insertSell(top, newCell);
+}
 // let tsListLimiter = {
 //     value: -Infinity,
 //     next: tsList1,
@@ -182,9 +184,7 @@ function addToTsList(firstEl, el) {
 /*
 * add element in the end of two directions linked list
 * */
+
 function addToEndTsList(bottom, newCell) {
-    newCell.prev = bottom.prev;
-    bottom.prev = newCell;
-    newCell.prev.next = newCell;
-    newCell.next = bottom;
+    insertSell(bottom.prev, newCell);
 }
