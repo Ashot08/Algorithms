@@ -204,32 +204,19 @@ function deleteCell(afterMe){
 
 function addCellInSorted(top, cell){
     let currentCell = top;
-    while (currentCell.next !== null){
-        if(currentCell.value > cell.value){
-            insertCell(currentCell, cell);
-            return;
-        }
+    while (currentCell.next.value < cell.value){
         currentCell = currentCell.next;
     }
+    insertCell(currentCell, cell);
 }
 
-let tsList1, tsList2, tsList3, tsListLimiter;
-tsList1 = {
-    value: 1,
-}
-tsList2 = {
-    value: 2,
-}
-tsList3 = {
-    value: 3,
-}
-tsListLimiter = {
+let tsListLimiter = {
     value: -Infinity,
     prev: null
 }
 
 
-let sortedArr = [1,2,3,4,5,6,7,8];
+let sortedArr = [1,2,3,5,6,7,8];
 function construct2dList(top, arr){
     let currentCell = top;
     let topCell = currentCell;
@@ -241,8 +228,13 @@ function construct2dList(top, arr){
         }
         currentCell = currentCell.next;
     }
+    currentCell.next = {
+        value: Infinity,
+        next: null,
+        prev: currentCell,
+    }
     return topCell;
 }
-
-//addCellInSorted(tsListLimiter ,{value: 3});
-console.log(construct2dList(tsListLimiter, sortedArr));
+construct2dList(tsListLimiter, sortedArr);
+addCellInSorted(tsListLimiter ,{value: 14});
+console.log(tsListLimiter);
