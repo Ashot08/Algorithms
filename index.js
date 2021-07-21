@@ -151,15 +151,17 @@ let list2 = {
 /*
 * add element in begin of two directions linked list
 * */
-function insertCell(afterMe, newCell){
+function insertCell(afterMe, newCell) {
     newCell.next = afterMe.next;
     afterMe.next = newCell;
     newCell.next.prev = newCell;
     newCell.prev = afterMe;
 }
+
 function addToTsList(top, newCell) {
     insertCell(top, newCell);
 }
+
 // let tsListLimiter = {
 //     value: -Infinity,
 //     next: tsList1,
@@ -193,7 +195,7 @@ function addToEndTsList(bottom, newCell) {
 * delete cell from two directions list
 * */
 
-function deleteCell(afterMe){
+function deleteCell(afterMe) {
     afterMe.next.next.prev = afterMe;
     afterMe.next = afterMe.next.next;
 }
@@ -202,9 +204,9 @@ function deleteCell(afterMe){
 * add cell in sorted two directions list (list sorted from min to max value)
 * */
 
-function addCellInSorted(top, cell){
+function addCellInSorted(top, cell) {
     let currentCell = top;
-    while (currentCell.next.value < cell.value){
+    while (currentCell.next.value < cell.value) {
         currentCell = currentCell.next;
     }
     insertCell(currentCell, cell);
@@ -215,12 +217,12 @@ let tsListLimiter = {
     prev: null
 }
 
+let sortedArr = [1, 2, 3, 4, 5, 6, 7, 8];
 
-let sortedArr = [1,2,3,5,6,7,8];
-function construct2dList(top, arr){
+function construct2dList(top, arr) {
     let currentCell = top;
     let topCell = currentCell;
-    for(let i = 0; i < arr.length; i++){
+    for (let i = 0; i < arr.length; i++) {
         currentCell.next = {
             value: arr[i],
             next: null,
@@ -235,6 +237,22 @@ function construct2dList(top, arr){
     }
     return topCell;
 }
-construct2dList(tsListLimiter, sortedArr);
-addCellInSorted(tsListLimiter ,{value: 14});
-console.log(tsListLimiter);
+
+// construct2dList(tsListLimiter, sortedArr);
+// addCellInSorted(tsListLimiter ,{value: 14});
+// console.log(tsListLimiter);
+
+
+/*
+* check is linked list sorted from min to max
+* */
+let newList = construct2dList(tsListLimiter, sortedArr);
+
+function checkSorted(top) {
+    while (top.next && top.value <= top.next.value) {
+        top = top.next;
+    }
+    return top.next === null;
+}
+
+//console.log(checkSorted(newList));
