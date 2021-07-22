@@ -256,3 +256,64 @@ function checkSorted(top) {
 }
 
 //console.log(checkSorted(newList));
+
+
+/*
+*
+* multithreaded linked list
+* sort planets
+*
+* */
+
+class Planet{
+    constructor(name, distanceToSun, mass, diameter, nextDistance, nextMass, nextDiameter) {
+        this.name = name;
+        this.distanceToSun = distanceToSun;
+        this.mass = mass;
+        this.diameter = diameter;
+        this.nextDistance = nextDistance;
+        this.nextMass = nextMass;
+        this.nextDiameter = nextDiameter;
+    }
+}
+
+const Mars = new Planet('Mars', 228, 6.42*Math.pow(10, 23), 6779);
+const Earth = new Planet('Earth', 150, 5.9*Math.pow(10, 24), 12756);
+const Saturn = new Planet('Saturn', 1427, 5.6*Math.pow(10, 26),120660);
+
+const planets = [Mars, Earth, Saturn];
+
+function sortPlanets(planets){
+    if(planets.length < 2){
+        return 'nothing to sort';
+    }
+    let distances = [];
+    let masses = [];
+    let diameters = [];
+    for(let i = 0; i < planets.length; i++){
+        distances.push({
+            planet: planets[i],
+            value: planets[i].distanceToSun,
+        });
+        masses.push({
+            planet: planets[i],
+            value: planets[i].mass,
+        });
+        diameters.push({
+            planet: planets[i],
+            value: planets[i].diameter,
+        });
+    }
+
+    distances.sort((a,b)=>a.value - b.value);
+    masses.sort((a,b)=>a.value - b.value);
+    diameters.sort((a,b)=>a.value - b.value);
+
+    for(let i = 0; i < distances.length; i++){
+        distances[i].planet.nextDistance = distances[i+1] ?? null;
+    }
+
+    return distances;
+}
+
+console.log(sortPlanets(planets));
