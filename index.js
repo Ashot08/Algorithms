@@ -342,3 +342,51 @@ sortByBlock.addEventListener('click', function(e){
 for(let item of Object.keys(sortedPlanets)){
     sortByBlock.innerHTML += `<li data-index="${item}" ><button>${item}</button></li>`
 }
+
+
+
+/*
+* turtle and hare
+* algorithm to find a loop in linked list
+* */
+const linkedListLoopEnd = {
+    value: 7,
+    next: null
+}
+const linkedListLoopStart = {
+    value: 4,
+    next: {
+        value: 5,
+        next: {
+            value: 6,
+            next: linkedListLoopEnd
+        }
+    }
+}
+linkedListLoopEnd.link = linkedListLoopStart;
+const linkedList={
+    value: -Infinity,
+    next: {
+        value: 1,
+        next: {
+            value: 2,
+            next: {
+                value: 3,
+                next: linkedListLoopStart
+            }
+        }
+    }
+}
+
+function rabbitAndTurtle(top){
+    while(true){
+        let rabbit = top.value;
+        let turtle = top.value;
+        if(rabbit === null){
+            return 'loop not found';
+        }
+        //rabbit = top.next.next;
+
+    }
+}
+console.log(linkedList)
