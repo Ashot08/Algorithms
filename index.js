@@ -280,7 +280,7 @@ class Planet{
 const Mars = new Planet('Mars', 228, 6.42*Math.pow(10, 23), 6779);
 const Earth = new Planet('Earth', 150, 5.9*Math.pow(10, 24), 12756);
 const Saturn = new Planet('Saturn', 1427, 5.6*Math.pow(10, 26),120660);
-
+const Oro = new Planet('Oro', 27, 5.6*Math.pow(10, 27),12960);
 const planets = [Mars, Earth, Saturn];
 
 function sortPlanets(planets){
@@ -309,11 +309,36 @@ function sortPlanets(planets){
     masses.sort((a,b)=>a.value - b.value);
     diameters.sort((a,b)=>a.value - b.value);
 
-    for(let i = 0; i < distances.length; i++){
+    for(let i = 0; i < planets.length; i++){
         distances[i].planet.nextDistance = distances[i+1] ?? null;
+        masses[i].planet.nextMass        = masses[i+1] ?? null;
+        diameters[i].planet.nextDiameter = diameters[i+1] ?? null;
     }
-
-    return distances;
+    return{
+        distances,
+        masses,
+        diameters
+    }
 }
+function addPlanetToList(planet){
+    planets.push(planet);
+    return sortPlanets(planets);
+}
+sortPlanets(planets);
+const sortedPlanets = addPlanetToList(Oro);
 
-console.log(sortPlanets(planets));
+let sortByBlock = document.querySelector('#sort-by ul');
+let resultBlock = document.querySelector('#result ul');
+
+sortByBlock.addEventListener('click', function(e){
+    if(e.target.tagName === 'BUTTON'){
+        const toShow = e.target.closest('li').dataset.index;
+        resultBlock.innerHTML = '';
+        for(let planet of sortedPlanets[toShow]){
+            resultBlock.innerHTML += `<li>${planet.planet.name} - ${planet.value}</li>`;
+        }
+    }
+})
+for(let item of Object.keys(sortedPlanets)){
+    sortByBlock.innerHTML += `<li data-index="${item}" ><button>${item}</button></li>`
+}
