@@ -265,7 +265,7 @@ function checkSorted(top) {
 *
 * */
 
-class Planet{
+class Planet {
     constructor(name, distanceToSun, mass, diameter, nextDistance, nextMass, nextDiameter) {
         this.name = name;
         this.distanceToSun = distanceToSun;
@@ -277,20 +277,20 @@ class Planet{
     }
 }
 
-const Mars = new Planet('Mars', 228, 6.42*Math.pow(10, 23), 6779);
-const Earth = new Planet('Earth', 150, 5.9*Math.pow(10, 24), 12756);
-const Saturn = new Planet('Saturn', 1427, 5.6*Math.pow(10, 26),120660);
-const Oro = new Planet('Oro', 27, 5.6*Math.pow(10, 27),12960);
+const Mars = new Planet('Mars', 228, 6.42 * Math.pow(10, 23), 6779);
+const Earth = new Planet('Earth', 150, 5.9 * Math.pow(10, 24), 12756);
+const Saturn = new Planet('Saturn', 1427, 5.6 * Math.pow(10, 26), 120660);
+const Oro = new Planet('Oro', 27, 5.6 * Math.pow(10, 27), 12960);
 const planets = [Mars, Earth, Saturn];
 
-function sortPlanets(planets){
-    if(planets.length < 2){
+function sortPlanets(planets) {
+    if (planets.length < 2) {
         return 'nothing to sort';
     }
     let distances = [];
     let masses = [];
     let diameters = [];
-    for(let i = 0; i < planets.length; i++){
+    for (let i = 0; i < planets.length; i++) {
         distances.push({
             planet: planets[i],
             value: planets[i].distanceToSun,
@@ -305,44 +305,45 @@ function sortPlanets(planets){
         });
     }
 
-    distances.sort((a,b)=>a.value - b.value);
-    masses.sort((a,b)=>a.value - b.value);
-    diameters.sort((a,b)=>a.value - b.value);
+    distances.sort((a, b) => a.value - b.value);
+    masses.sort((a, b) => a.value - b.value);
+    diameters.sort((a, b) => a.value - b.value);
 
-    for(let i = 0; i < planets.length; i++){
-        distances[i].planet.nextDistance = distances[i+1] ?? null;
-        masses[i].planet.nextMass        = masses[i+1] ?? null;
-        diameters[i].planet.nextDiameter = diameters[i+1] ?? null;
+    for (let i = 0; i < planets.length; i++) {
+        distances[i].planet.nextDistance = distances[i + 1] ?? null;
+        masses[i].planet.nextMass = masses[i + 1] ?? null;
+        diameters[i].planet.nextDiameter = diameters[i + 1] ?? null;
     }
-    return{
+    return {
         distances,
         masses,
         diameters
     }
 }
-function addPlanetToList(planet){
+
+function addPlanetToList(planet) {
     planets.push(planet);
     return sortPlanets(planets);
 }
+
 sortPlanets(planets);
 const sortedPlanets = addPlanetToList(Oro);
 
 let sortByBlock = document.querySelector('#sort-by ul');
 let resultBlock = document.querySelector('#result ul');
 
-sortByBlock.addEventListener('click', function(e){
-    if(e.target.tagName === 'BUTTON'){
+sortByBlock.addEventListener('click', function (e) {
+    if (e.target.tagName === 'BUTTON') {
         const toShow = e.target.closest('li').dataset.index;
         resultBlock.innerHTML = '';
-        for(let planet of sortedPlanets[toShow]){
+        for (let planet of sortedPlanets[toShow]) {
             resultBlock.innerHTML += `<li>${planet.planet.name} - ${planet.value}</li>`;
         }
     }
 })
-for(let item of Object.keys(sortedPlanets)){
+for (let item of Object.keys(sortedPlanets)) {
     sortByBlock.innerHTML += `<li data-index="${item}" ><button>${item}</button></li>`
 }
-
 
 
 /*
@@ -350,21 +351,24 @@ for(let item of Object.keys(sortedPlanets)){
 * algorithm to find a loop in linked list
 * */
 const linkedListLoopEnd = {
-    value: 7,
+    value: 9,
     next: null
 }
 const linkedListLoopStart = {
-    value: 4,
+    value: 5,
     next: {
-        value: 5,
+        value: 6,
         next: {
-            value: 6,
-            next: linkedListLoopEnd
+            value: 7,
+            next: {
+                value: 8,
+                next: linkedListLoopEnd
+            }
         }
     }
 }
-linkedListLoopEnd.link = linkedListLoopStart;
-const linkedList={
+linkedListLoopEnd.next = linkedListLoopStart;
+const linkedList = {
     value: -Infinity,
     next: {
         value: 1,
@@ -372,21 +376,43 @@ const linkedList={
             value: 2,
             next: {
                 value: 3,
-                next: linkedListLoopStart
+                next: {
+                    value: 4,
+                    next: linkedListLoopStart
+                }
             }
         }
     }
 }
 
-function rabbitAndTurtle(top){
-    while(true){
-        let rabbit = top.value;
-        let turtle = top.value;
-        if(rabbit === null){
-            return 'loop not found';
-        }
-        //rabbit = top.next.next;
+function rabbitAndTurtle(top) {
+    let rabbit = top;
+    let turtle = top;
 
+    while (true) {
+        turtle = turtle.next;
+        rabbit = rabbit.next;
+
+        if (rabbit === null) {
+            return 'loop not found';
+        }else{
+            if (rabbit.next === null) return 'loop not found';
+            rabbit = rabbit.next;
+        }
+        if(rabbit.next === turtle.next){
+            if(finishLine(top, turtle)){
+                return top;
+            }
+        }
     }
 }
-console.log(linkedList)
+function finishLine(rabbit,turtle){
+    while(rabbit.next !== turtle.next){
+        rabbit = rabbit.next;
+        turtle = turtle.next;
+    }
+    turtle.next = null;
+    return true;
+}
+
+//console.log(rabbitAndTurtle(linkedList))
