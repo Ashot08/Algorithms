@@ -392,10 +392,7 @@ function rabbitAndTurtle(top) {
     while (true) {
         turtle = turtle.next;
         rabbit = rabbit.next;
-
-        if (rabbit === null) {
-            return 'loop not found';
-        }else{
+        for(let i = 0; i < 2; i++){
             if (rabbit.next === null) return 'loop not found';
             rabbit = rabbit.next;
         }
@@ -415,4 +412,4 @@ function finishLine(rabbit,turtle){
     return true;
 }
 
-//console.log(rabbitAndTurtle(linkedList))
+console.log(rabbitAndTurtle(linkedList))
