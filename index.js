@@ -392,19 +392,20 @@ function rabbitAndTurtle(top) {
     while (true) {
         turtle = turtle.next;
         rabbit = rabbit.next;
-        for(let i = 0; i < 2; i++){
+        for (let i = 0; i < 2; i++) {
             if (rabbit.next === null) return 'loop not found';
             rabbit = rabbit.next;
         }
-        if(rabbit.next === turtle.next){
-            if(finishLine(top, turtle)){
+        if (rabbit.next === turtle.next) {
+            if (finishLine(top, turtle)) {
                 return top;
             }
         }
     }
 }
-function finishLine(rabbit,turtle){
-    while(rabbit.next !== turtle.next){
+
+function finishLine(rabbit, turtle) {
+    while (rabbit.next !== turtle.next) {
         rabbit = rabbit.next;
         turtle = turtle.next;
     }
@@ -426,15 +427,16 @@ function finishLine(rabbit,turtle){
 * Sample variance
 * */
 
-function getSampleVariance(arr){
+function getSampleVariance(arr) {
     const N = arr.length;
-    const middleValue = arr.reduce((a,b)=> a+b)/N;
-    const sum = arr.reduce((acc,el) => {
+    const middleValue = arr.reduce((a, b) => a + b) / N;
+    const sum = arr.reduce((acc, el) => {
         acc += Math.pow(el - middleValue, 2);
         return acc;
     }, 0);
-    return sum/N
+    return sum / N
 }
+
 //console.log(getSampleVariance([5,6,9,8]))
 
 /*
@@ -442,8 +444,30 @@ function getSampleVariance(arr){
 * deviation
 * */
 
-function findDeviation(arr){
+function findDeviation(arr) {
     const sampleVariance = getSampleVariance(arr);
     return Math.sqrt(sampleVariance);
 }
+
 //console.log(findDeviation([5,6,9,8]));
+
+
+/*
+* 3
+* Find median of sorted array
+* */
+
+function findMedian(sortedArray) {
+    if (sortedArray.length === 0) {
+        return null;
+    }
+
+    const length = sortedArray.length;
+    if (length % 2 === 0) {
+        return ( sortedArray[length/2 - 1] + sortedArray[length/2] ) / 2;
+    }
+    return sortedArray[Math.ceil(length/2 - 1)];
+}
+
+// const sortedArray = [ 1, 3, 4, 7, 8, 8, 9 ];
+// console.log(findMedian(sortedArray))
