@@ -416,6 +416,13 @@ function finishLine(rabbit,turtle){
 
 
 /*
+*
+* Chapter 4
+*
+* */
+
+/*
+* 1
 * Sample variance
 * */
 
@@ -428,4 +435,15 @@ function getSampleVariance(arr){
     }, 0);
     return sum/N
 }
-console.log(getSampleVariance([5,6,9,8]))
+//console.log(getSampleVariance([5,6,9,8]))
+
+/*
+* 2
+* deviation
+* */
+
+function findDeviation(arr){
+    const sampleVariance = getSampleVariance(arr);
+    return Math.sqrt(sampleVariance);
+}
+//console.log(findDeviation([5,6,9,8]));
