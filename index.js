@@ -468,7 +468,6 @@ function findMedian(sortedArray) {
     }
     return sortedArray[Math.ceil(length/2 - 1)];
 }
-
 // const sortedArray = [ 1, 3, 4, 7, 8, 8, 9 ];
 // console.log(findMedian(sortedArray))
 
@@ -496,6 +495,27 @@ function deleteElement(index, array){
     return newArr;
 
 }
-
 // const arrToDel = [1,2,3,4,5];
 // console.log( deleteElement(2, arrToDel) )
+
+/*
+* 5
+* Upper triangle array
+* */
+
+class UpperTriangleArray {
+    constructor(table = [], triangle = []) {
+        this.table = table;
+        this.triangle = triangle;
+    }
+    get triangleArray(){
+        for(let i = 0; i < this.table.length; i++){
+            for(let j = 0; j < this.table[i].length; i++){
+                this.triangle[(i*(i+1)/2 + j)].push();
+            }
+        }
+    }
+
+}
+const triangleArray = new UpperTriangleArray([[1,2,3], [1,2,3], [1,2,3]])
+console.log(triangleArray.triangleArray);
