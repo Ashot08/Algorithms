@@ -471,3 +471,31 @@ function findMedian(sortedArray) {
 
 // const sortedArray = [ 1, 3, 4, 7, 8, 8, 9 ];
 // console.log(findMedian(sortedArray))
+
+/*
+* 4
+* Delete element from array
+* */
+
+function deleteElement(index, array){
+    //return array.slice(0, index).concat(array.slice(index+1));
+
+    const newArr = [];
+    if(index > array.length - 1){
+        return newArr.concat( array );
+    }
+    for(let i = 0; i < index; i++){
+        newArr.push(array[i]);
+    }
+    for ( let i = index; i < array.length - 2; i++){
+        newArr.push( array[i + 1] );
+    }
+    if(index !== array.length -1){
+        newArr.push(array[array.length - 1]);
+    }
+    return newArr;
+
+}
+
+// const arrToDel = [1,2,3,4,5];
+// console.log( deleteElement(2, arrToDel) )
