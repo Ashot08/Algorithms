@@ -412,4 +412,20 @@ function finishLine(rabbit,turtle){
     return true;
 }
 
-console.log(rabbitAndTurtle(linkedList))
+//console.log(rabbitAndTurtle(linkedList))
+
+
+/*
+* Sample variance
+* */
+
+function getSampleVariance(arr){
+    const N = arr.length;
+    const middleValue = arr.reduce((a,b)=> a+b)/N;
+    const sum = arr.reduce((acc,el) => {
+        acc += Math.pow(el - middleValue, 2);
+        return acc;
+    }, 0);
+    return sum/N
+}
+console.log(getSampleVariance([5,6,9,8]))
