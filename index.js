@@ -503,7 +503,7 @@ function deleteElement(index, array){
 * Triangle array
 * */
 
-class UpperTriangleArray {
+class TriangleArray {
     constructor(table = [], triangle = []) {
         this.table = table;
         this.triangle = triangle;
@@ -520,7 +520,7 @@ class UpperTriangleArray {
         return this.triangleArray[y*(y+1)/2 + x];
     }
 }
- const triangleArray = new UpperTriangleArray([[1,2,3], [1,2,3], [1,2,3]])
+// const triangleArray = new TriangleArray([[1,2,3], [1,2,3], [1,2,3]])
 // console.log(triangleArray.triangleArray);
 // console.log(triangleArray.getCell(1,1));
 // console.log(triangleArray.getCell(0,2));
@@ -530,3 +530,14 @@ class UpperTriangleArray {
 * 6
 * Upper Triangle Array
 * */
+
+class UpperTriangleArray extends TriangleArray{
+    getCell(x, y){
+        const length = Math.ceil(this.triangleArray.length/2) - 1;
+        y = length - y;
+        return this.triangleArray[y*(y+1)/2 + x];
+    }
+}
+// const triangleArray = new UpperTriangleArray([[1,2,3], [1,2,3], [1,2,3]])
+// console.log(triangleArray.triangleArray);
+// console.log(triangleArray.getCell(0,2));
