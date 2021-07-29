@@ -541,3 +541,13 @@ class UpperTriangleArray extends TriangleArray{
 // const triangleArray = new UpperTriangleArray([[1,2,3], [1,2,3], [1,2,3]])
 // console.log(triangleArray.triangleArray);
 // console.log(triangleArray.getCell(0,2));
+
+
+function buildRecDiagonalArray(Nx, Ny){
+    const c = Math.sqrt(Math.pow(Nx,2) + Math.pow(Ny,2));
+    const sinAlpha = Ny/c;
+    const alpha = Math.asin(sinAlpha)*180/Math.PI;
+    console.log(sinAlpha);
+}
+
+buildRecDiagonalArray(2,3)
