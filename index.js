@@ -542,12 +542,28 @@ class UpperTriangleArray extends TriangleArray{
 // console.log(triangleArray.triangleArray);
 // console.log(triangleArray.getCell(0,2));
 
+/*
+* 7, 8
+* Rectangle diagonal array
+* */
 
-function buildRecDiagonalArray(Nx, Ny){
+function findAngle(Nx, Ny){
     const c = Math.sqrt(Math.pow(Nx,2) + Math.pow(Ny,2));
     const sinAlpha = Ny/c;
-    const alpha = Math.asin(sinAlpha)*180/Math.PI;
-    console.log(sinAlpha);
+    return Math.asin(sinAlpha)*180/Math.PI;
+}
+function buildRecDiagonalArray(Nx, Ny){
+    const diagonalArray = [];
+    const alpha = findAngle(Nx, Ny);
+    for(let i = 0; i < Ny; i++){
+        diagonalArray[i] = [];
+        for(let j = 0; j < Nx; j++){
+            const alphaJI = findAngle(j+1, i+1);
+            diagonalArray[i][j] = (alphaJI >= alpha) ? '1' : '0';
+        }
+    }
+    return diagonalArray;
 }
 
-buildRecDiagonalArray(2,3)
+console.log(buildRecDiagonalArray(10,5));
+
