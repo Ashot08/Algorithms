@@ -565,5 +565,28 @@ function buildRecDiagonalArray(Nx, Ny){
     return diagonalArray;
 }
 
-console.log(buildRecDiagonalArray(10,5));
+//console.log(buildRecDiagonalArray(10,5));
 
+/*
+* 9
+* in Rectangle array every element's value equal to the distance to closest side
+* */
+
+function buildRecDistanceArray(Nx, Ny){
+    const array = [];
+    const alpha = findAngle(Nx, Ny);
+    for(let i = 0; i < Ny; i++){
+        array[i] = [];
+        for(let j = 0; j < Nx; j++){
+            let shortest = Infinity;
+            const distances = [i, Ny - i - 1, j, Nx - j - 1 ];
+            shortest = distances.reduce((acc, el)=>{
+                acc = (acc < el) ? acc : el;
+                return acc;
+            })
+            array[i][j] = shortest;
+        }
+    }
+    return array;
+}
+//console.log(buildRecDistanceArray(9,9));
