@@ -578,15 +578,9 @@ function buildRecDistanceArray(Nx, Ny){
     for(let i = 0; i < Ny; i++){
         array[i] = [];
         for(let j = 0; j < Nx; j++){
-            let shortest = Infinity;
-            const distances = [i, Ny - i - 1, j, Nx - j - 1 ];
-            shortest = distances.reduce((acc, el)=>{
-                acc = (acc < el) ? acc : el;
-                return acc;
-            })
-            array[i][j] = shortest;
+            array[i][j] = Math.min( i, Ny - i - 1, j, Nx - j - 1 );
         }
     }
     return array;
 }
-//console.log(buildRecDistanceArray(9,9));
+console.log(buildRecDistanceArray(9,9));
