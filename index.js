@@ -583,4 +583,47 @@ function buildRecDistanceArray(Nx, Ny){
     }
     return array;
 }
-console.log(buildRecDistanceArray(9,9));
+//console.log(buildRecDistanceArray(9,9));
+
+/*
+* 10
+* */
+
+
+
+/*
+* 11
+* build Triangle array with a gap
+* */
+function buildTriangleGapArray(rows){
+    let listRows = {
+        value: Infinity,
+        status: 'rowLimiter',
+        next: null,
+    };
+
+
+
+    for(let i = 0; i < rows; i++){
+        let listCols = {
+            value: Infinity,
+            status: 'colsLimiter',
+            next: null
+        }
+        listRows = {
+            value: 1,
+            status: 'row',
+            next: listRows,
+            entries: listCols,
+        };
+        for (let j = 0; j < i+1; j++){
+            listCols.next = {
+                value: 1,
+                status: 'col',
+                next: listRows.entries.next
+            };
+        }
+    }
+    return listRows;
+}
+console.log(buildTriangleGapArray(5));
