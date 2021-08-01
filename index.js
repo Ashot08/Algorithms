@@ -504,26 +504,33 @@ function deleteElement(index, array){
 * */
 
 class TriangleArray {
-    constructor(table = [], triangle = []) {
-        this.table = table;
-        this.triangle = triangle;
+    constructor(length = [], triangle = []) {
+        this.length = length;
+        this.triangle = this.makeTriangleArray();
     }
-    get triangleArray(){
-        for(let i = 0; i < this.table.length; i++){
-            for(let j = 0; j < this.table[i].length; j++){
-                this.triangle[(i*(i+1)/2 + j)] = (this.table[i][j]);
+    makeTriangleArray(){
+        let arr = [];
+        for(let i = 0; i < this.length; i++){
+            for(let j = 0; j < this.length; j++){
+                arr[(i*(i+1)/2 + j)] = i;
             }
         }
+        return arr;
+    }
+    get get(){
         return this.triangle;
     }
     getCell(x, y){
-        return this.triangleArray[y*(y+1)/2 + x];
+        if(x > y) return undefined;
+        return this.triangle[y*(y+1)/2 + x];
     }
 }
-// const triangleArray = new TriangleArray([[1,2,3], [1,2,3], [1,2,3]])
-// console.log(triangleArray.triangleArray);
+//const triangleArray = new TriangleArray(5)
+
+// console.log(triangleArray.get);
+// console.log(triangleArray.getCell(0, 0));
 // console.log(triangleArray.getCell(1,1));
-// console.log(triangleArray.getCell(0,2));
+// console.log(triangleArray.getCell(4,4));
 
 
 /*
@@ -598,7 +605,7 @@ function buildRecDistanceArray(Nx, Ny){
 function buildTriangleGapArray(rows){
     let list = {
         value: -Infinity,
-        status: 'rowsLimiter',
+        status: 'rowsTopLimiter',
         next: null,
     };
     let currentRow = list;
@@ -629,3 +636,25 @@ function buildTriangleGapArray(rows){
     return list;
 }
 //console.log(buildTriangleGapArray(5));
+
+
+/*
+* 12
+* Triangle array addition
+* */
+
+class TriangleArrayWithAdd extends TriangleArray{
+    add(triangleArray){
+        return this.triangle.map((item, index)=>{
+            if(triangleArray.triangle[index]){
+                item += triangleArray.triangle[index];
+            }
+            return item;
+        });
+    }
+}
+
+// const trArr1 = new TriangleArrayWithAdd(5);
+// const trArr2 = new TriangleArrayWithAdd(5);
+// console.log(trArr1.add(trArr2));
+
