@@ -596,34 +596,36 @@ function buildRecDistanceArray(Nx, Ny){
 * build Triangle array with a gap
 * */
 function buildTriangleGapArray(rows){
-    let listRows = {
-        value: Infinity,
-        status: 'rowLimiter',
+    let list = {
+        value: -Infinity,
+        status: 'rowsLimiter',
         next: null,
     };
-
-
+    let currentRow = list;
 
     for(let i = 0; i < rows; i++){
-        let listCols = {
-            value: Infinity,
-            status: 'colsLimiter',
-            next: null
-        }
-        listRows = {
-            value: 1,
+        currentRow.next = {
+            value: 'R-' + (i+1),
             status: 'row',
-            next: listRows,
-            entries: listCols,
-        };
-        for (let j = 0; j < i+1; j++){
-            listCols.next = {
-                value: 1,
-                status: 'col',
-                next: listRows.entries.next
-            };
+            next: null,
+            entries: {
+                value: -Infinity,
+                status: 'colsLimiter',
+                next: null
+            }
         }
+        currentRow = currentRow.next;
+        let currentCol = currentRow.entries;
+        for (let j = 0; j < i+1; j++){
+            currentCol.next = {
+                value: 'C-' + (j+1),
+                status: 'row',
+                next: null,
+            }
+            currentCol = currentCol.next;
+        }
+
     }
-    return listRows;
+    return list;
 }
-console.log(buildTriangleGapArray(5));
+//console.log(buildTriangleGapArray(5));
