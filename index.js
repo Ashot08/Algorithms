@@ -658,3 +658,22 @@ class TriangleArrayWithAdd extends TriangleArray{
 // const trArr2 = new TriangleArrayWithAdd(5);
 // console.log(trArr1.add(trArr2));
 
+class TriangleArrayWithMultiply extends TriangleArrayWithAdd{
+    multiply(triangleArray){
+        const newArr = new Array(this.length*(this.length+1)/2).fill(0);
+        for(let i = 0; i < this.length; i++){
+            for(let j = 0; j <= i; j++){
+                const index = i*(i+1)/2 + j;
+                for(let k = 0; k <=j; k++){
+                    newArr[index] += this.getCell(k,i)*triangleArray.getCell(k, j);
+                    console.log(newArr[index])
+                }
+            }
+        }
+        return newArr;
+    }
+}
+const trArr1 = new TriangleArrayWithMultiply(5);
+const trArr2 = new TriangleArrayWithMultiply(5);
+console.log(trArr1);
+console.log(trArr1.multiply(trArr2));
