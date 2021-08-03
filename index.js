@@ -685,7 +685,7 @@ class TriangleArrayWithMultiply extends TriangleArrayWithAdd {
     }
 }
 
-const trArr1 = new TriangleArrayWithMultiply(5);
-const trArr2 = new TriangleArrayWithMultiply(5);
-
-console.log(trArr1.multiply(trArr2));
+// const trArr1 = new TriangleArrayWithMultiply(5);
+// const trArr2 = new TriangleArrayWithMultiply(5);
+//
+// console.log(trArr1.multiply(trArr2));
