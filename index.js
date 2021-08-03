@@ -464,10 +464,11 @@ function findMedian(sortedArray) {
 
     const length = sortedArray.length;
     if (length % 2 === 0) {
-        return ( sortedArray[length/2 - 1] + sortedArray[length/2] ) / 2;
+        return (sortedArray[length / 2 - 1] + sortedArray[length / 2]) / 2;
     }
-    return sortedArray[Math.ceil(length/2 - 1)];
+    return sortedArray[Math.ceil(length / 2 - 1)];
 }
+
 // const sortedArray = [ 1, 3, 4, 7, 8, 8, 9 ];
 // console.log(findMedian(sortedArray))
 
@@ -476,25 +477,26 @@ function findMedian(sortedArray) {
 * Delete element from array
 * */
 
-function deleteElement(index, array){
+function deleteElement(index, array) {
     //return array.slice(0, index).concat(array.slice(index+1));
 
     const newArr = [];
-    if(index > array.length - 1){
-        return newArr.concat( array );
+    if (index > array.length - 1) {
+        return newArr.concat(array);
     }
-    for(let i = 0; i < index; i++){
+    for (let i = 0; i < index; i++) {
         newArr.push(array[i]);
     }
-    for ( let i = index; i < array.length - 2; i++){
-        newArr.push( array[i + 1] );
+    for (let i = index; i < array.length - 2; i++) {
+        newArr.push(array[i + 1]);
     }
-    if(index !== array.length -1){
+    if (index !== array.length - 1) {
         newArr.push(array[array.length - 1]);
     }
     return newArr;
 
 }
+
 // const arrToDel = [1,2,3,4,5];
 // console.log( deleteElement(2, arrToDel) )
 
@@ -508,23 +510,27 @@ class TriangleArray {
         this.length = length;
         this.triangle = this.makeTriangleArray();
     }
-    makeTriangleArray(){
+
+    makeTriangleArray() {
         let arr = [];
-        for(let i = 0; i < this.length; i++){
-            for(let j = 0; j < this.length; j++){
-                arr[(i*(i+1)/2 + j)] = i;
+        for (let i = 0; i < this.length; i++) {
+            for (let j = 0; j < this.length; j++) {
+                arr[(i * (i + 1) / 2 + j)] = i;
             }
         }
         return arr;
     }
-    get get(){
+
+    get get() {
         return this.triangle;
     }
-    getCell(x, y){
-        if(x > y) return undefined;
-        return this.triangle[y*(y+1)/2 + x];
+
+    getCell(x, y) {
+        if (x > y) return undefined;
+        return this.triangle[y * (y + 1) / 2 + x];
     }
 }
+
 //const triangleArray = new TriangleArray(5)
 
 // console.log(triangleArray.get);
@@ -538,13 +544,14 @@ class TriangleArray {
 * Upper Triangle Array
 * */
 
-class UpperTriangleArray extends TriangleArray{
-    getCell(x, y){
-        const length = Math.ceil(this.triangleArray.length/2) - 1;
+class UpperTriangleArray extends TriangleArray {
+    getCell(x, y) {
+        const length = Math.ceil(this.triangleArray.length / 2) - 1;
         y = length - y;
-        return this.triangleArray[y*(y+1)/2 + x];
+        return this.triangleArray[y * (y + 1) / 2 + x];
     }
 }
+
 // const triangleArray = new UpperTriangleArray([[1,2,3], [1,2,3], [1,2,3]])
 // console.log(triangleArray.triangleArray);
 // console.log(triangleArray.getCell(0,2));
@@ -554,18 +561,19 @@ class UpperTriangleArray extends TriangleArray{
 * Rectangle diagonal array
 * */
 
-function findAngle(Nx, Ny){
-    const c = Math.sqrt(Math.pow(Nx,2) + Math.pow(Ny,2));
-    const sinAlpha = Ny/c;
-    return Math.asin(sinAlpha)*180/Math.PI;
+function findAngle(Nx, Ny) {
+    const c = Math.sqrt(Math.pow(Nx, 2) + Math.pow(Ny, 2));
+    const sinAlpha = Ny / c;
+    return Math.asin(sinAlpha) * 180 / Math.PI;
 }
-function buildRecDiagonalArray(Nx, Ny){
+
+function buildRecDiagonalArray(Nx, Ny) {
     const diagonalArray = [];
     const alpha = findAngle(Nx, Ny);
-    for(let i = 0; i < Ny; i++){
+    for (let i = 0; i < Ny; i++) {
         diagonalArray[i] = [];
-        for(let j = 0; j < Nx; j++){
-            const alphaJI = findAngle(j+1, i+1);
+        for (let j = 0; j < Nx; j++) {
+            const alphaJI = findAngle(j + 1, i + 1);
             diagonalArray[i][j] = (alphaJI >= alpha) ? '1' : '0';
         }
     }
@@ -579,17 +587,18 @@ function buildRecDiagonalArray(Nx, Ny){
 * in Rectangle array every element's value equal to the distance to closest side
 * */
 
-function buildRecDistanceArray(Nx, Ny){
+function buildRecDistanceArray(Nx, Ny) {
     const array = [];
     const alpha = findAngle(Nx, Ny);
-    for(let i = 0; i < Ny; i++){
+    for (let i = 0; i < Ny; i++) {
         array[i] = [];
-        for(let j = 0; j < Nx; j++){
-            array[i][j] = Math.min( i, Ny - i - 1, j, Nx - j - 1 );
+        for (let j = 0; j < Nx; j++) {
+            array[i][j] = Math.min(i, Ny - i - 1, j, Nx - j - 1);
         }
     }
     return array;
 }
+
 //console.log(buildRecDistanceArray(9,9));
 
 /*
@@ -597,12 +606,11 @@ function buildRecDistanceArray(Nx, Ny){
 * */
 
 
-
 /*
 * 11
 * build Triangle array with a gap
 * */
-function buildTriangleGapArray(rows){
+function buildTriangleGapArray(rows) {
     let list = {
         value: -Infinity,
         status: 'rowsTopLimiter',
@@ -610,9 +618,9 @@ function buildTriangleGapArray(rows){
     };
     let currentRow = list;
 
-    for(let i = 0; i < rows; i++){
+    for (let i = 0; i < rows; i++) {
         currentRow.next = {
-            value: 'R-' + (i+1),
+            value: 'R-' + (i + 1),
             status: 'row',
             next: null,
             entries: {
@@ -623,9 +631,9 @@ function buildTriangleGapArray(rows){
         }
         currentRow = currentRow.next;
         let currentCol = currentRow.entries;
-        for (let j = 0; j < i+1; j++){
+        for (let j = 0; j < i + 1; j++) {
             currentCol.next = {
-                value: 'C-' + (j+1),
+                value: 'C-' + (j + 1),
                 status: 'row',
                 next: null,
             }
@@ -635,6 +643,7 @@ function buildTriangleGapArray(rows){
     }
     return list;
 }
+
 //console.log(buildTriangleGapArray(5));
 
 
@@ -643,10 +652,10 @@ function buildTriangleGapArray(rows){
 * Triangle array addition
 * */
 
-class TriangleArrayWithAdd extends TriangleArray{
-    add(triangleArray){
-        return this.triangle.map((item, index)=>{
-            if(triangleArray.triangle[index]){
+class TriangleArrayWithAdd extends TriangleArray {
+    add(triangleArray) {
+        return this.triangle.map((item, index) => {
+            if (triangleArray.triangle[index]) {
                 item += triangleArray.triangle[index];
             }
             return item;
@@ -658,28 +667,25 @@ class TriangleArrayWithAdd extends TriangleArray{
 // const trArr2 = new TriangleArrayWithAdd(5);
 // console.log(trArr1.add(trArr2));
 
-class TriangleArrayWithMultiply extends TriangleArrayWithAdd{
-    multiply(triangleArray){
-        const newArr = new Array(this.length*(this.length+1)/2).fill(0);
-        for(let i = 0; i < this.length; i++){
-            for(let j = 0; j <= i; j++){
-                const index = i*(i+1)/2 + j;
+class TriangleArrayWithMultiply extends TriangleArrayWithAdd {
+    multiply(triangleArray) {
+        const newArr = new Array(this.length * (this.length + 1) / 2).fill(0);
+        for (let i = 0; i < this.length; i++) {
+            for (let j = 0; j <= i; j++) {
+                const index = i * (i + 1) / 2 + j;
 
-                for(let k = 0; k <= 4; k++){
-                    if(this.getCell(k,i) !== undefined && triangleArray.getCell(j, k) !== undefined){
+                for (let k = 0; k <= 4; k++) {
+                    if (this.getCell(k, i) !== undefined && triangleArray.getCell(j, k) !== undefined) {
                         newArr[index] += this.getCell(k, i) * triangleArray.getCell(j, k);
-                        console.log('a1 - ' + this.getCell(k, i) +' - index ' + index + `(${k}, ${i})`);
-                        console.log('a2 - ' + triangleArray.getCell(j, k) +' - index ' + index + `(${j}, ${k})`);
                     }
-
                 }
-                console.log('----------------')
             }
         }
         return newArr;
     }
 }
-const trArr1 = new TriangleArrayWithMultiply(5);
-const trArr2 = new TriangleArrayWithMultiply(5);
 
-console.log(trArr1.multiply(trArr2));
+// const trArr1 = new TriangleArrayWithMultiply(5);
+// const trArr2 = new TriangleArrayWithMultiply(5);
+//
+// console.log(trArr1.multiply(trArr2));
