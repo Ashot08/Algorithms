@@ -674,7 +674,7 @@ class TriangleArrayWithMultiply extends TriangleArrayWithAdd {
             for (let j = 0; j <= i; j++) {
                 const index = i * (i + 1) / 2 + j;
 
-                for (let k = 0; k <= 4; k++) {
+                for (let k = 0; k <= i; k++) {
                     if (this.getCell(k, i) !== undefined && triangleArray.getCell(j, k) !== undefined) {
                         newArr[index] += this.getCell(k, i) * triangleArray.getCell(j, k);
                     }
@@ -685,7 +685,7 @@ class TriangleArrayWithMultiply extends TriangleArrayWithAdd {
     }
 }
 
-// const trArr1 = new TriangleArrayWithMultiply(5);
-// const trArr2 = new TriangleArrayWithMultiply(5);
-//
-// console.log(trArr1.multiply(trArr2));
+const trArr1 = new TriangleArrayWithMultiply(5);
+const trArr2 = new TriangleArrayWithMultiply(5);
+
+console.log(trArr1.multiply(trArr2));
