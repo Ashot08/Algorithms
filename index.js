@@ -667,6 +667,10 @@ class TriangleArrayWithAdd extends TriangleArray {
 // const trArr2 = new TriangleArrayWithAdd(5);
 // console.log(trArr1.add(trArr2));
 
+/*
+* 13
+* Triangle array with multiply
+* */
 class TriangleArrayWithMultiply extends TriangleArrayWithAdd {
     multiply(triangleArray) {
         const newArr = new Array(this.length * (this.length + 1) / 2).fill(0);
@@ -689,3 +693,70 @@ class TriangleArrayWithMultiply extends TriangleArrayWithAdd {
 // const trArr2 = new TriangleArrayWithMultiply(5);
 //
 // console.log(trArr1.multiply(trArr2));
+
+
+/*
+* 14
+* Matrix array with gap
+* addition
+* */
+
+function buildGapArrayMatrix(rows, cols) {
+    let list = {
+        value: -Infinity,
+        status: 'rowsTopLimiter',
+        next: null,
+    };
+    let currentRow = list;
+
+    for (let i = 0; i < rows; i++) {
+        currentRow.next = {
+            value: 'R-' + (i + 1),
+            status: 'row',
+            next: null,
+            entries: {
+                value: -Infinity,
+                status: 'colsLimiter',
+                next: null
+            }
+        }
+        currentRow = currentRow.next;
+        let currentCol = currentRow.entries;
+        for (let j = 0; j < cols; j++) {
+            currentCol.next = {
+                value: 'C-' + (j + 1),
+                status: 'row',
+                next: null,
+            }
+            currentCol = currentCol.next;
+        }
+
+    }
+    return list;
+}
+
+function sumGapMatrix(matrix1, matrix2){
+    let m1Current = matrix1.next;
+    let m2Current = matrix2.next;
+    const newMatrix = {
+        value: -Infinity,
+        status: 'rowsTopLimiter',
+        next: m1Current,
+    };
+    const newMatrixCurrent = newMatrix;
+    while(m1Current !== null || m2Current !== null){
+        if(m1Current === null){
+            newMatrix.next = m2Current;
+        }
+        while (m1Current.entries.next !== null || m2Current.entries.next !== null){
+            if( m1Current.entries ) m1Current.entries = m1Current.entries.next;
+            if( m2Current.entries ) m2Current.entries = m2Current.entries.next
+        }
+        if( m1Current ) m1Current = m1Current.next;
+        if( m2Current ) m2Current = m2Current.next;
+    }
+    return newMatrix;
+}
+const matrix1 = buildGapArrayMatrix(5, 3);
+const matrix2 = buildGapArrayMatrix(6, 4);
+console.log(matrix1);
