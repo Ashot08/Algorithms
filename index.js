@@ -760,3 +760,43 @@ function sumGapMatrix(matrix1, matrix2){
 const matrix1 = buildGapArrayMatrix(5, 3);
 const matrix2 = buildGapArrayMatrix(6, 4);
 console.log(matrix1);
+
+
+/*
+* Stack & queue
+* */
+
+/*
+* 2
+* Reverse Stack
+* */
+const stack = {
+    value: -Infinity,
+    next: {
+        value: 1,
+        next: {
+            value: 2,
+            next: {
+                value: 3,
+                next: {
+                    value: Infinity,
+                    next: null
+                }
+            }
+        }
+    },
+}
+function reverseStack(stack){
+    const newStack = {
+        value: -Infinity,
+        next: {
+            value: Infinity,
+            next: null,
+        }
+    }
+    let currentEl = stack.next;
+    while(currentEl.next !== null){
+        //newStack.next
+        currentEl = currentEl.next
+    }
+}
